@@ -2,9 +2,17 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
+import { useRouter } from 'next/navigation';
 
 export function DashboardHome() {
+
+    const router = useRouter();
+  
+    const handleUploadClick = () => {
+      router.push('/upload');
+    };
   return (
+    
     <div className="flex flex-col min-h-screen bg-muted/40">
       <header className="bg-background border-b px-4 py-3 sm:px-6">
         <div className="flex items-center justify-between max-w-6xl mx-auto">
@@ -43,7 +51,7 @@ export function DashboardHome() {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-bold">WhistleBlowing</h1>
-            <Button>Upload</Button>
+            <Button onClick={handleUploadClick}>Upload</Button>
           </div>
           <Card>
             <CardContent>

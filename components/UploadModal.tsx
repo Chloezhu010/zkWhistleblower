@@ -15,6 +15,8 @@ import { Input } from "~~/components/ui/input"
 import { Label } from "~~/components/ui/label"
 
 export function DialogCloseButton() {
+  
+  
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -23,6 +25,7 @@ export function DialogCloseButton() {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Share link</DialogTitle>
+          <Button>upload</Button>
           <DialogDescription>
             Anyone who has this link will be able to view this.
           </DialogDescription>
