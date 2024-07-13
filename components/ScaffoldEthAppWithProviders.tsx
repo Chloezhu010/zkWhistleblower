@@ -66,7 +66,7 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
     <DynamicContextProvider
       theme={resolvedTheme === "dark" ? "dark" : "light"}
       settings={{
-        environmentId: scaffoldConfig.dynamicEnvId,
+        environmentId: '1e041865-5427-46fa-a2b0-410ea4425e2a',
         walletConnectors: [EthereumWalletConnectors],
         walletConnectorExtensions: [EthersExtension],
         overrides: {

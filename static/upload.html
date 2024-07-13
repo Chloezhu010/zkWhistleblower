@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whistleblower Upload Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
+  <div class="w-full max-w-2xl p-6 bg-white rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold mb-4 text-center">Whistleblower Upload Page</h1>
+    <div class="flex justify-between mb-4">
+      <input
+        class="flex h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-2/3"
+        placeholder="Insert title"
+      />
+      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background hover:text-accent-foreground h-10 px-4 py-2 text-red-500 border-red-500 hover:bg-red-50">
+        Connect
+      </button>
+    </div>
+    <div class="mb-4">
+      <textarea
+        class="flex min-h-[80px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full h-24"
+        placeholder="Describe the issue"
+      ></textarea>
+    </div>
+    <div class="flex justify-between mb-4">
+      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-1/4">
+        Upload
+      </button>
+    </div>
+    <div class="text-center text-sm text-gray-500">
+      <p>Your submission is anonymous and secure.</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,11 +1,11 @@
 // pages/upload.tsx
 import React from 'react';
-import { DialogCloseButton } from '~~/components/UploadModal';
+import { UploadModal } from '~~/components/UploadModal';
 
 const UploadPage = () => {
   return (
     <div>
-      <DialogCloseButton />
+      <UploadModal />
     </div>
   );
 };
