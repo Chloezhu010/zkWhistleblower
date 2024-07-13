@@ -1,5 +1,7 @@
 import { TopicsTable } from "./TopicTable";
 import { Button } from "../ui/button";
+import { UploadModal } from "../UploadModal";
+
 
 const topicsData = [
   {
@@ -28,23 +30,17 @@ const topicsData = [
     lastReply: "1 day ago",
   },
 ];
-import { useRouter } from 'next/navigation';
 
 export function DashboardHome() {
 
-    const router = useRouter();
-  
-    const handleUploadClick = () => {
-      router.push('/upload');
-    };
   return (
-    
+
     <div className="flex flex-col min-h-screen bg-muted/40">
       <main className="flex-1 bg-muted/40 p-4 md:p-10">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-bold">WhistleBlowing</h1>
-            <Button>Upload</Button>
+            <UploadModal />
           </div>
           <TopicsTable topics={topicsData} />
         </div>
