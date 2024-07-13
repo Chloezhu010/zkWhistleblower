@@ -59,7 +59,7 @@ contract Whistleblower {
 
     // Function to add a comment to a post
     function addProof(uint256 postId, string memory cid) public payable {
-        require(postId < nextPostId, "Invalid post ID");
+        require(postId <= nextPostId, "Invalid post ID");
         proofs[postId][nextProofId[postId]] = Proof({
             author: address(msg.sender),
             cid: cid,
@@ -73,5 +73,9 @@ contract Whistleblower {
     function getPost(uint256 postId) public view returns (Post memory) {
         require(postId < nextPostId, "Invalid post ID");
         return posts[postId];
+    }
+
+    function getNextPostId() public view returns (uint256) {
+        return nextPostId;
     }
 }
