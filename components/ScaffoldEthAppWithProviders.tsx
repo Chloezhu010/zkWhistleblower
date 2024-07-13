@@ -15,6 +15,7 @@ import { customEvmNetworks } from "~~/lib/networks";
 import scaffoldConfig from "~~/scaffold.config";
 import { wagmiConfig } from "~~/services/web3/wagmiConfig";
 import { EthersExtension } from "@dynamic-labs/ethers-v5";
+import { SessionProvider } from "next-auth/react";
 
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
@@ -48,11 +49,6 @@ const evmNetworks = [
     chainId: chain.id,
     name: chain.name,
     rpcUrls: Object.values(chain.rpcUrls).map(({ http }) => http[0]),
-    iconUrls: [
-      chain.name === "Hardhat"
-        ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4i1wWF516fnkizp1WSDG5rnG8GfkQAVoVQ&s"
-        : "",
-    ],
     nativeCurrency: chain.nativeCurrency,
     networkId: chain.id,
   })),

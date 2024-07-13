@@ -1,5 +1,6 @@
 import { TopicsTable } from "./TopicTable";
 import { UploadModal } from "../UploadModal";
+import VerifyWLD from "../VerifyWLD";
 
 
 const topicsData = [
@@ -39,7 +40,7 @@ export function DashboardHome() {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-bold">WhistleBlowing</h1>
-            <UploadModal />
+            <VerifyWLD onSuccess={() => { }} />
           </div>
           <TopicsTable topics={topicsData} />
         </div>

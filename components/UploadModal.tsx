@@ -1,4 +1,4 @@
-import { Copy } from "lucide-react"
+'use client'
 import { useState } from "react"
 import { Button } from "~~/components/ui/button"
 import {
@@ -13,9 +13,12 @@ import {
 } from "~~/components/ui/dialog"
 import { Input } from "~~/components/ui/input"
 import { Label } from "~~/components/ui/label"
+import VerifyWLD from "./VerifyWLD"
+
 
 export function UploadModal() {
   const [fileHash, setFileHash] = useState<string | null>(null)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -42,8 +45,12 @@ export function UploadModal() {
     })
   }
 
+  const handleVerifySuccess = () => {
+    setIsDialogOpen(false)
+  }
+
   return (
-    <Dialog>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">Upload</Button>
       </DialogTrigger>
@@ -54,7 +61,7 @@ export function UploadModal() {
             Call out and whistleblow
           </DialogDescription>
         </DialogHeader>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 -z-40">
           <div className="grid flex-1 gap-2">
             <Label htmlFor="picture" className="sr-only">
               Link
@@ -64,6 +71,7 @@ export function UploadModal() {
         </div>
         {fileHash && <p>File Hash: {fileHash}</p>}
         <Button>upload</Button>
+        <VerifyWLD onSuccess={handleVerifySuccess} />
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
             <Button type="button" variant="secondary">

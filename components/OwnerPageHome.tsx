@@ -1,6 +1,6 @@
 import { PostCard } from "~~/components/ownerpage/PostCard";
 import { TransactionHistory } from "~~/components/ownerpage/TransactionHistory";
-import { DonateCard, CommentsCard } from "~~/components/ownerpage/sidecard/Comment";
+import { DonateCard, CommentsCard } from "~~/components/ownerpage/SideCard/Comment";
 
 export function OwnerPageHome() {
   return (
