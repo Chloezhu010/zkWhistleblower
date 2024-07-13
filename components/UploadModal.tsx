@@ -1,5 +1,5 @@
 import { Copy } from "lucide-react"
-
+import { useState } from "react"
 import { Button } from "~~/components/ui/button"
 import {
   Dialog,
@@ -14,38 +14,56 @@ import {
 import { Input } from "~~/components/ui/input"
 import { Label } from "~~/components/ui/label"
 
-export function DialogCloseButton() {
-  
-  
+export function UploadModal() {
+  const [fileHash, setFileHash] = useState<string | null>(null)
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      const hash = await calculateFileHash(file)
+      setFileHash(hash)
+    }
+  }
+
+  const calculateFileHash = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => {
+        const buffer = reader.result as ArrayBuffer
+        const hashBuffer = crypto.subtle.digest("SHA-256", buffer)
+        hashBuffer.then((hash) => {
+          const hashArray = Array.from(new Uint8Array(hash))
+          const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("")
+          resolve(hashHex)
+        })
+      }
+      reader.onerror = () => reject(reader.error)
+      reader.readAsArrayBuffer(file)
+    })
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Share</Button>
+        <Button variant="outline">Upload</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Share link</DialogTitle>
-          <Button>upload</Button>
           <DialogDescription>
-            Anyone who has this link will be able to view this.
+            Call out and whistleblow
           </DialogDescription>
         </DialogHeader>
         <div className="flex items-center space-x-2">
           <div className="grid flex-1 gap-2">
-            <Label htmlFor="link" className="sr-only">
+            <Label htmlFor="picture" className="sr-only">
               Link
             </Label>
-            <Input
-              id="link"
-              defaultValue="https://ui.shadcn.com/docs/installation"
-              readOnly
-            />
+            <Input id="picture" type="file" onChange={handleFileUpload} />
           </div>
-          <Button type="submit" size="sm" className="px-3">
-            <span className="sr-only">Copy</span>
-            <Copy className="h-4 w-4" />
-          </Button>
         </div>
+        {fileHash && <p>File Hash: {fileHash}</p>}
+        <Button>upload</Button>
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
             <Button type="button" variant="secondary">
