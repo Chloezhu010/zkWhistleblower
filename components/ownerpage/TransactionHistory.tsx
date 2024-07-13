@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~~/components/ui/table";
-import { Button } from "~~/components/ui/button";
+import { UploadModal } from "~~/components/UploadModal";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/ui/card";
 
 export function TransactionHistory() {
@@ -9,7 +9,7 @@ export function TransactionHistory() {
                 <CardTitle>
                     <div className="flex items-center justify-between mb-6">
                         <h1 className="text-2xl font-bold">Transaction History</h1>
-                        <Button>Upload</Button>
+                        <UploadModal />
                     </div>
                 </CardTitle>
             </CardHeader>
