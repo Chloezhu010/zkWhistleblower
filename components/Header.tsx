@@ -44,9 +44,8 @@ export const HeaderMenuLinks = () => {
             <Link
               href={href}
               passHref
-              className={`${
-                isActive ? "bg-secondary shadow-md" : ""
-              } hover:bg-secondary hover:shadow-md focus:!bg-secondary active:!text-neutral py-1.5 px-3 text-sm rounded-full gap-2 grid grid-flow-col`}
+              className={`${isActive ? "bg-secondary shadow-md" : ""
+                } hover:bg-secondary hover:shadow-md focus:!bg-secondary active:!text-neutral py-1.5 px-3 text-sm rounded-full gap-2 grid grid-flow-col`}
             >
               {icon}
               <span>{label}</span>
@@ -114,3 +113,65 @@ export const Header = () => {
     </div>
   );
 };
+
+
+import Link from "next/link";
+import { Button } from "../ui/button";
+
+function FlagIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+      <line x1="4" x2="4" y1="22" y2="15" />
+    </svg>
+  )
+}
+
+// export function Header() {
+//   return (
+//     <header className="bg-background border-b px-4 py-3 sm:px-6">
+//       <div className="flex items-center justify-between max-w-6xl mx-auto">
+//         <div className="flex items-center gap-4">
+//           <Link href="#" className="flex items-center gap-2 text-lg font-semibold" prefetch={false}>
+//             <FlagIcon className="w-6 h-6" />
+//             <span className="sr-only">Forum</span>
+//           </Link>
+//           <nav className="hidden font-medium sm:flex flex-row items-center gap-5 text-sm lg:gap-6">
+//             <Link href="#" className="font-bold" prefetch={false}>
+//               Home
+//             </Link>
+//             <Link href="#" className="text-muted-foreground" prefetch={false}>
+//               Categories
+//             </Link>
+//             <Link href="#" className="text-muted-foreground" prefetch={false}>
+//               Popular
+//             </Link>
+//             <Link href="#" className="text-muted-foreground" prefetch={false}>
+//               Recent
+//             </Link>
+//             <Link href="#" className="text-muted-foreground" prefetch={false}>
+//               Trending
+//             </Link>
+//           </nav>
+//         </div>
+//         <div className="flex items-center gap-4">
+//           <Button variant="ghost" size="icon" className="rounded-full">
+//             <img src="/placeholder.svg" width="32" height="32" className="rounded-full border" alt="Avatar" />
+//             <span className="sr-only">Toggle user menu</span>
+//           </Button>
+//         </div>
+//       </div>
+//     </header>
+//   );
+// }
