@@ -15,8 +15,9 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@dynamic-labs/ethereum": "^3.0.0-alpha.13",
-    "@dynamic-labs/sdk-react-core": "^3.0.0-alpha.13",
+    "@dynamic-labs/ethereum": "^2.3.1",
+    "@dynamic-labs/ethers-v5": "^2.3.1",
+    "@dynamic-labs/sdk-react-core": "^2.3.1",
     "@dynamic-labs/viem-utils": "3.0.0-alpha.13",
     "@dynamic-labs/wagmi-connector": "^3.0.0-alpha.13",
     "@heroicons/react": "^2.0.11",
@@ -52,7 +53,7 @@
     "tailwindcss-animate": "^1.0.7",
     "use-debounce": "^8.0.4",
     "usehooks-ts": "^2.13.0",
-    "viem": "2.13.6",
+    "viem": "^2.17.3",
     "wagmi": "2.9.8",
     "zustand": "^4.1.2"
   },
