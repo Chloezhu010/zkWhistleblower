@@ -7375,11 +7375,6 @@ pend@~1.2.0:
   resolved "https://registry.npmjs.org/pend/-/pend-1.2.0.tgz"
   integrity sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==
 
-permissionless@0.1.22:
-  version "0.1.22"
-  resolved "https://registry.npmjs.org/permissionless/-/permissionless-0.1.22.tgz"
-  integrity sha512-C+1l3dkYKOicCilPXLbm5JfnLOKK+Efprg69SG+WRsNjuXHi4zSdQgex/7lF5hh4WvcaWRRMm1NCA523XlwCJw==
-
 picocolors@1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/picocolors/-/picocolors-1.0.0.tgz"
