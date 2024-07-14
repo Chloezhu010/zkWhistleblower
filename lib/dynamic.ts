@@ -1,4 +1,4 @@
-import { Wallet } from "@dynamic-labs/sdk-react-core";
+import { EvmNetwork, Wallet } from "@dynamic-labs/sdk-react-core";
 import { NetworkConfigurationMap } from "@dynamic-labs/types";
 import { getOrMapViemChain } from "@dynamic-labs/viem-utils";
 import { Account, Chain, Hex, Transport, WalletClient, parseEther } from "viem";
@@ -26,7 +26,7 @@ export const sendTransaction = async (
       throw new Error("Network not found");
     }
 
-    const chain = getOrMapViemChain(currentNetwork);
+    const chain = getOrMapViemChain(currentNetwork as EvmNetwork);
 
     const transaction = {
       account: wallet.address as Hex,

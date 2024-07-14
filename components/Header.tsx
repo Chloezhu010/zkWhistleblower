@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useCallback, useRef, useState } from "react";
+import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
-import { useOutsideClick } from "~~/hooks/scaffold-eth";
+import React, { useCallback, useRef, useState } from "react";
 
 type HeaderMenuLink = {
   label: string;
@@ -38,7 +37,6 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/trending",
     icon: null,
   },
-
 ];
 
 export const HeaderMenuLinks = () => {
@@ -53,8 +51,9 @@ export const HeaderMenuLinks = () => {
             <Link
               href={href}
               passHref
-              className={`${isActive ? "bg-secondary shadow-md" : ""
-                } hover:bg-secondary hover:shadow-md focus:!bg-secondary active:!text-neutral py-1.5 px-3 text-sm rounded-full gap-2 grid grid-flow-col`}
+              className={`${
+                isActive ? "bg-secondary shadow-md" : ""
+              } hover:bg-secondary hover:shadow-md focus:!bg-secondary active:!text-neutral py-1.5 px-3 text-sm rounded-full gap-2 grid grid-flow-col`}
             >
               {icon}
               <span>{label}</span>
@@ -67,7 +66,6 @@ export const HeaderMenuLinks = () => {
 };
 
 export const Header = () => {
-
   return (
     <header className="bg-background border-b px-4 py-3 sm:px-6">
       <div className="flex items-center justify-between max-w-6xl mx-auto">

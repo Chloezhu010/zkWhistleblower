@@ -49,7 +49,7 @@ export function TransactionHistory() {
         setLogs(existingLogs);
       } catch (error) {
         console.error("Failed to fetch logs:", error);
-        setError(error);
+        setError(null);
       } finally {
         setLoading(false);
       }
@@ -99,9 +99,9 @@ export function TransactionHistory() {
             <TableCell>
               {log.transactionHash ? sliceAddress(log.transactionHash) : ""}
             </TableCell>
-            <TableCell>{decoded.eventName}</TableCell>
+            <TableCell>{decoded?.eventName}</TableCell>
             <TableCell>{log.blockNumber?.toString()}</TableCell>
-            <TableCell>{sliceAddress(decoded.author)}</TableCell>
+            <TableCell>{sliceAddress(decoded?.author)}</TableCell>
             <TableCell>{sliceAddress(log.address)}</TableCell>
           </TableRow>
         );
