@@ -1,3 +1,6 @@
+import { ethers } from "ethers";
+import { useEffect, useState } from "react";
+import * as CONTRACT_ABI from "~~/components/abi.json";
 import { Avatar, AvatarFallback, AvatarImage } from "~~/components/ui/avatar";
 import { Button } from "~~/components/ui/button";
 import {
@@ -9,25 +12,59 @@ import {
   CardTitle,
 } from "~~/components/ui/card";
 
-export function PostCard() {
+export function PostCard({
+  id,
+  Poster,
+  content,
+  timestamp,
+}: {
+  id: number;
+  Poster: string;
+  content: string;
+  timestamp: number;
+}) {
+  const [postInfo, setPostInfo] = useState({
+    id: 0,
+    Poster: "",
+    content: "",
+    timestamp: 0,
+  });
+
+  useEffect(() => {
+    const getPostInfo = async () => {
+      const provider = new ethers.providers.Web3Provider(
+        window.ethereum as any
+      );
+
+      const contract = new ethers.Contract(
+        "0x52A6Edcb61a2d4835347E77aaCb1eA453FBB9e46",
+        CONTRACT_ABI,
+        provider
+      );
+
+      try {
+        const tx = await contract.getPost(id);
+        await tx.wait();
+        console.log("CID stored in smart contract:", tx);
+        setPostInfo(tx);
+      } catch (error) {
+        console.error("Error storing CID in smart contract:", error);
+      }
+    };
+  }, []);
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Introducing the new forum design</CardTitle>
+        <CardTitle>Topic #{id}</CardTitle>
         <CardDescription>
-          Discuss the latest updates to the forum design and provide feedback.
+          Posted by {Poster} on {new Date(timestamp).toLocaleString()}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           <div className="prose">
-            <p>
-              The new forum design introduces a fresh and modern look, with
-              improved navigation and better organization of topics. We've also
-              added new features to enhance the user experience, such as the
-              ability to subscribe to specific categories and receive
-              notifications.
-            </p>
+            <p>{content}</p>
           </div>
         </div>
       </CardContent>
