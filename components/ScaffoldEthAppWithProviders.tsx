@@ -9,13 +9,11 @@ import { Toaster } from "react-hot-toast";
 import { WagmiProvider } from "wagmi";
 import { Footer } from "~~/components/Footer";
 import { Header } from "~~/components/Header";
-import { ProgressBar } from "~~/components/scaffold-eth/ProgressBar";
 import { useInitializeNativeCurrencyPrice } from "~~/hooks/scaffold-eth";
 import { customEvmNetworks } from "~~/lib/networks";
 import scaffoldConfig from "~~/scaffold.config";
 import { wagmiConfig } from "~~/services/web3/wagmiConfig";
 import { EthersExtension } from "@dynamic-labs/ethers-v5";
-import { SessionProvider } from "next-auth/react";
 
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
@@ -73,7 +71,6 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
       <WagmiProvider config={wagmiConfig}>
         <QueryClientProvider client={queryClient}>
           <DynamicWagmiConnector>
-            <ProgressBar />
 
             <ScaffoldEthApp>{children}</ScaffoldEthApp>
           </DynamicWagmiConnector>

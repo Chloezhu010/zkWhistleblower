@@ -5,7 +5,7 @@ import { TopicsTable } from "./TopicTable";
 import { UploadModal } from "../UploadModal";
 import CONTRACT_ABI from "../abi.json"
 
-// 合约地址和ABI
+
 const CONTRACT_ADDRESS = "0x52A6Edcb61a2d4835347E77aaCb1eA453FBB9e46";
 import VerifyWLD from "../VerifyWLD";
 
