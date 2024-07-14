@@ -13,8 +13,8 @@ export const useContractLogs = (address: Address) => {
       if (!client) return console.error("Client not found");
       try {
         const existingLogs = await client.getLogs({
-          address: address,
-          fromBlock: 0n,
+          address: "0x52A6Edcb61a2d4835347E77aaCb1eA453FBB9e46",
+          fromBlock: 5460387n,
           toBlock: "latest",
         });
         setLogs(existingLogs);

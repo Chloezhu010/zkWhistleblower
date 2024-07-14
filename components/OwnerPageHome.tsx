@@ -1,6 +1,8 @@
 import { PostCard } from "~~/components/ownerpage/PostCard";
 import { TransactionHistory } from "~~/components/ownerpage/TransactionHistory";
-import { DonateCard, CommentsCard } from "~~/components/ownerpage/sidecard/Comment";
+import { DonateCard } from "./ownerpage/SideCard/Dondation";
+import { DonateList } from "./ownerpage/SideCard/DonationList";
+
 
 export function OwnerPageHome() {
   return (
@@ -15,7 +17,7 @@ export function OwnerPageHome() {
             </div>
             <div className="space-y-6">
               <DonateCard />
-              <CommentsCard />
+              <DonateList />
             </div>
           </div>
         </div>
