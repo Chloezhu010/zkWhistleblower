@@ -16,5 +16,6 @@ Consequently, the twitter account details of the message sender, the exact conte
 <img width="1193" alt="Screenshot 2024-07-13 at 9 49 55 PM" src="https://github.com/user-attachments/assets/56498bb2-6c9e-48fe-9cf3-f9eecbc23991">
 
 ## Deployed contract address
-TBD Scroll contract
-[notes: Scroll's Deployed contract addresses much be included in your repo’s README.]
+ZERO network CA: 0x1b9218F1496AD74f390aB6E061d4dcAF8572fC61 (https://explorer.zero.network/address/0x1b9218F1496AD74f390aB6E061d4dcAF8572fC61)
+
+SCROLL NETWORK CA: 0x693C0590fB2CdcD4c4b0f8235e3f007EeB998C22 (https://sepolia.scrollscan.com/address/0x52a6edcb61a2d4835347e77aacb1ea453fbb9e46#code)
