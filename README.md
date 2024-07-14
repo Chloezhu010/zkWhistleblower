@@ -17,3 +17,4 @@ Consequently, the twitter account details of the message sender, the exact conte
 
 ## Deployed contract address
 TBD Scroll contract
+[notes: Scroll's Deployed contract addresses much be included in your repo’s README.]
