@@ -1,10 +1,53 @@
 import { SidebarCard } from "./Comment";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { ethers } from "ethers";
-import { useContractLogs } from "~~/hooks/scaffold-eth";
+import { useState, useCallback, useEffect, useMemo } from "react";
+import { Log } from "viem";
+import { usePublicClient } from "wagmi";
+import { useTargetNetwork } from "~~/hooks/scaffold-eth";
 
 export function DonateList() {
-  const log = useContractLogs("0x52A6Edcb61a2d4835347E77aaCb1eA453FBB9e46");
+  const { targetNetwork } = useTargetNetwork();
+  const client = usePublicClient({ chainId: targetNetwork.id });
+
+  const [logs, setLogs] = useState<Log[]>([]);
+  const [isWLDVerified, setIsWLDVerified] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const handleWLDVerification = useCallback(() => {
+    setIsWLDVerified(localStorage.getItem("wld") === "true");
+  }, []);
+
+  useEffect(() => {
+    const getLogs = async () => {
+      if (!client) {
+        console.error("Client not found");
+        return;
+      }
+
+      try {
+        const existingLogs = await client.getLogs({
+          address: "0x52A6Edcb61a2d4835347E77aaCb1eA453FBB9e46",
+          fromBlock: 5460387n,
+          toBlock: "latest",
+        });
+        setLogs(existingLogs);
+      } catch (error) {
+        console.error("Failed to fetch logs:", error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getLogs();
+    handleWLDVerification();
+  }, [client, handleWLDVerification]);
+
+  const sliceAddress = useCallback((address: string | `0x${string}`) => {
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+  }, []);
 
   const decodeEvent = (topics: string[]) => {
     const eventSignatureHash =
@@ -22,6 +65,35 @@ export function DonateList() {
     const eventValue = eventFragment.inputs;
     return eventName;
   };
+  const renderedLogs = useMemo(() => {
+    return logs
+      .map((log) => {
+        const decoded = decodeEvent(log.topics, log.data);
+        if (decoded && decoded.eventName === "PostCreated") {
+          // Skip PostCreated events
+          return null;
+        }
+        return (
+          <Donation
+            key={log.transactionHash}
+            transactionHash={log.transactionHash}
+            eventName={decoded.eventName}
+            blockNumber={log.blockNumber?.toString()}
+            author={sliceAddress(decoded.author)}
+            address={sliceAddress(log.address)}
+          />
+        );
+      })
+      .filter(Boolean);
+  }, [logs, decodeEvent, sliceAddress]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading transaction history.</div>;
+  }
 
   return (
     <SidebarCard title="Donations">
