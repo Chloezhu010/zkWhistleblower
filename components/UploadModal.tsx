@@ -22,39 +22,38 @@ import { Label } from "~~/components/ui/label"
 import VerifyWLD from "./VerifyWLD"
 
 
-export function UploadModal() {
-  const [fileHash, setFileHash] = useState<string | null>(null)
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-
-// 替换为你的 Pinata API Key 和 Secret Key
-const PINATA_API_KEY = '2a196df298a58847a1a3';
-const PINATA_SECRET_API_KEY = '689cd7a82979ed5f3be3089151abb7f06b8e5061b1c740594ad233c19a06615e';
-
-const uploadToPinata = async (file: File) => {
-  const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
-
-  const formData = new FormData();
-  formData.append('file', file);
-
-  const headers = {
-    'pinata_api_key': PINATA_API_KEY,
-    'pinata_secret_api_key': PINATA_SECRET_API_KEY,
-  };
-
-  try {
-    const response = await axios.post(url, formData, { headers });
-    console.log('File uploaded successfully:', response.data);
-    return response.data;
-  } catch (error) {
-    console.error('Error uploading file to Pinata:', error);
-    return null;
-  }
-};
-
 const UploadModal = () => {
   const { address, isConnected } = useAccount(); // Destructure address and isConnected from useAccount
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileHash, setFileHash] = useState<string | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+
+  // 替换为你的 Pinata API Key 和 Secret Key
+  const PINATA_API_KEY = '2a196df298a58847a1a3';
+  const PINATA_SECRET_API_KEY = '689cd7a82979ed5f3be3089151abb7f06b8e5061b1c740594ad233c19a06615e';
+
+  const uploadToPinata = async (file: File) => {
+    const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const headers = {
+      'pinata_api_key': PINATA_API_KEY,
+      'pinata_secret_api_key': PINATA_SECRET_API_KEY,
+    };
+
+    try {
+      const response = await axios.post(url, formData, { headers });
+      console.log('File uploaded successfully:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Error uploading file to Pinata:', error);
+      return null;
+    }
+  };
+
+
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -79,9 +78,13 @@ const UploadModal = () => {
       console.error('Wallet not connected or address not available');
       return;
     }
+    if (!window.ethereum) {
+      console.error('Ethereum object not found, install Metamask.');
+      return;
+    }
 
     // Use ethers to get the provider and signer
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const provider = new ethers.providers.Web3Provider(window.ethereum as any);
     const signer = provider.getSigner();
 
     // 创建合约实例
@@ -96,9 +99,6 @@ const UploadModal = () => {
     }
   };
 
-  const handleVerifySuccess = () => {
-    setIsDialogOpen(false)
-  }
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -122,8 +122,7 @@ const UploadModal = () => {
         </div>
         {fileHash && <p>File Hash: {fileHash}</p>}
         <Button onClick={handleUpload}>Upload</Button>
-        <VerifyWLD onSuccess={handleVerifySuccess} />
-        <DialogFooter className="sm:justify-start">
+]        <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
             <Button type="button" variant="secondary">
               Close
@@ -135,4 +134,4 @@ const UploadModal = () => {
   );
 };
 
-export {UploadModal};
+export default UploadModal;

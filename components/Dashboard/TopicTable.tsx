@@ -2,13 +2,17 @@ import { Card, CardContent, CardFooter } from "../ui/card";
 import { Table, TableBody, TableHeader, TableRow, TableHead } from "../ui/table";
 import { Button } from "../ui/button";
 import { TopicRow } from "./TopicRow";
-type topics = {
-    title: string;
-    replies: number;
-    lastReply: string;
+
+type Topic = {
+    id: bigint;
+    author: string;
+    content: string;
+    timestamp: bigint;
 }
 
-export function TopicsTable({ topics }: { topics: topics[] }) {
+export function TopicsTable({ topics }: { topics: Topic[] }) {
+
+
     return (
         <Card>
             <CardContent>
@@ -22,12 +26,12 @@ export function TopicsTable({ topics }: { topics: topics[] }) {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {topics.map((topic, index) => (
+                        {topics.map((topic) => (
                             <TopicRow
-                                key={index}
-                                topic={topic.title}
-                                replies={topic.replies}
-                                lastReply={topic.lastReply}
+                                key={topic.id}
+                                author={topic.author}
+                                content={topic.content}
+                                timestamp={topics.timestamp}
                             />
                         ))}
                     </TableBody>

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import { useAccount } from 'wagmi';
 import { TopicsTable } from "./TopicTable";
-import { UploadModal } from "../UploadModal";
 import CONTRACT_ABI from "../abi.json"
 
 

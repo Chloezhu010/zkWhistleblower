@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~~/components/ui/table";
-import { UploadModal } from "~~/components/UploadModal";
+import UploadModal from "~~/components/UploadModal";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/ui/card";
 
 export function TransactionHistory() {

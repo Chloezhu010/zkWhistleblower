@@ -12,18 +12,33 @@ interface VerifyWLDProps {
 const VerifyWLD: React.FC<VerifyWLDProps> = ({ onSuccess }) => {
     const appId: `app_${string}` = process.env.NEXT_PUBLIC_WLD_CLIENT_ID as `app_${string}`;
     const handleVerify = async (proof: ISuccessResult) => {
-        const res = await fetch("/api/verify", { // route to your backend will depend on implementation
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(proof),
-        })
-        console.log("res", res);
-        if (!res.ok) {
-            throw new Error("Verification failed."); // IDKit will display the error message to the user in the modal
+        console.log("googogo")
+        try {
+            const res = await fetch("/api/verify", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(proof),
+            });
+
+            console.log("res", res);
+            if (!res.ok) {
+                const errorData = await res.json();
+                console.error("Verification failed", errorData);
+                throw new Error("Verification failed."); // IDKit will display the error message to the user in the modal
+            } else {
+                const result = await res.json();
+                console.log("Verification succeeded", result);
+                // Handle successful verification response
+            }
+        } catch (error) {
+            console.error("Error during verification", error);
+            throw new Error("Verification failed."); // This message will be displayed to the user
         }
     };
+
+
 
 
     return (
