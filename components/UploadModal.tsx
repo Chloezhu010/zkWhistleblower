@@ -1,8 +1,6 @@
-"use client"; 
-
-import { Copy } from "lucide-react";
-import { useState } from "react";
-import { Button } from "~~/components/ui/button";
+'use client'
+import { useState } from "react"
+import { Button } from "~~/components/ui/button"
 import {
   Dialog,
   DialogClose,
@@ -13,14 +11,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~~/components/ui/dialog";
-import { Input } from "~~/components/ui/input";
-import { Label } from "~~/components/ui/label";
 
 import axios from 'axios';
 import FormData from 'form-data';
 import { useAccount } from 'wagmi'; // Import useAccount hook from the Wagmi library
 import { ethers } from 'ethers'; // Import ethers for interacting with Ethereum
 import CONTRACT_ABI from './abi.json'
+import { Input } from "~~/components/ui/input"
+import { Label } from "~~/components/ui/label"
+import VerifyWLD from "./VerifyWLD"
+
+
+export function UploadModal() {
+  const [fileHash, setFileHash] = useState<string | null>(null)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
 // 替换为你的 Pinata API Key 和 Secret Key
 const PINATA_API_KEY = '2a196df298a58847a1a3';
@@ -92,8 +96,12 @@ const UploadModal = () => {
     }
   };
 
+  const handleVerifySuccess = () => {
+    setIsDialogOpen(false)
+  }
+
   return (
-    <Dialog>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">Upload</Button>
       </DialogTrigger>
@@ -104,7 +112,7 @@ const UploadModal = () => {
             Select a file to upload to IPFS using Pinata.
           </DialogDescription>
         </DialogHeader>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 -z-40">
           <div className="grid flex-1 gap-2">
             <Label htmlFor="picture" className="sr-only">
               File
@@ -114,6 +122,7 @@ const UploadModal = () => {
         </div>
         {fileHash && <p>File Hash: {fileHash}</p>}
         <Button onClick={handleUpload}>Upload</Button>
+        <VerifyWLD onSuccess={handleVerifySuccess} />
         <DialogFooter className="sm:justify-start">
           <DialogClose asChild>
             <Button type="button" variant="secondary">

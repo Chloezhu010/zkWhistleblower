@@ -7,6 +7,7 @@ import CONTRACT_ABI from "../abi.json"
 
 // 合约地址和ABI
 const CONTRACT_ADDRESS = "0x52A6Edcb61a2d4835347E77aaCb1eA453FBB9e46";
+import VerifyWLD from "../VerifyWLD";
 
 
 const fetchContractData = async (provider: ethers.providers.Web3Provider) => {
@@ -41,7 +42,7 @@ const DashboardHome = () => {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-bold">WhistleBlowing</h1>
-            <UploadModal />
+            <VerifyWLD onSuccess={() => { }} />
           </div>
           <TopicsTable topics={topicsData} />
         </div>
