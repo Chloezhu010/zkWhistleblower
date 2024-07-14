@@ -31,6 +31,7 @@ const VerifyWLD: React.FC<VerifyWLDProps> = ({ onSuccess }) => {
                 const result = await res.json();
                 console.log("Verification succeeded", result);
                 // Handle successful verification response
+                localStorage.setItem("wld", "true");
             }
         } catch (error) {
             console.error("Error during verification", error);

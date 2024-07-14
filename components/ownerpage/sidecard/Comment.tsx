@@ -50,39 +50,43 @@ export function DonateCard() {
 
 export function CommentsCard() {
     return (
-        <SidebarCard title="Comments">
+        <SidebarCard title="Donations">
             <div className="space-y-4">
-                <Comment
+                <Donation
                     name="Jane Doe"
                     date="2 days ago"
                     avatar="/placeholder-user.jpg"
-                    comment="I really like the new design! The improved navigation and organization of topics makes it much easier to find what I'm looking for."
+                    amount="$100"
+                    message="Thank you for the great work! Keep it up!"
                 />
-                <Comment
+                <Donation
                     name="John Smith"
                     date="1 week ago"
                     avatar="/placeholder-user.jpg"
-                    comment="The new design looks great, but I'd love to see more customization options for users. Being able to personalize the forum experience would be a nice addition."
+                    amount="$50"
+                    message="Happy to support this initiative. Best of luck!"
                 />
-                <Comment
+                <Donation
                     name="Sarah Lee"
                     date="3 days ago"
                     avatar="/placeholder-user.jpg"
-                    comment="The new forum design is a huge improvement. The layout is clean and intuitive, and the added features like category subscriptions are really useful."
+                    amount="$75"
+                    message="This cause means a lot to me. Thank you for your efforts!"
                 />
             </div>
         </SidebarCard>
     );
 }
 
-interface CommentProps {
+interface DonationProps {
     name: string;
     date: string;
     avatar: string;
-    comment: string;
+    amount: string;
+    message: string;
 }
 
-function Comment({ name, date, avatar, comment }: CommentProps) {
+function Donation({ name, date, avatar, amount, message }: DonationProps) {
     return (
         <div className="flex items-start gap-4">
             <Avatar className="w-8 h-8">
@@ -95,7 +99,8 @@ function Comment({ name, date, avatar, comment }: CommentProps) {
                     <div className="text-muted-foreground text-sm">{date}</div>
                 </div>
                 <div className="prose text-muted-foreground">
-                    <p>{comment}</p>
+                    <p>{amount}</p>
+                    <p>{message}</p>
                 </div>
             </div>
         </div>

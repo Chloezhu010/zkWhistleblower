@@ -1,15 +1,31 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~~/components/ui/table";
 import UploadModal from "~~/components/UploadModal";
 import { Card, CardContent, CardHeader, CardTitle } from "~~/components/ui/card";
+import { useEffect, useState } from "react";
+import VerifyWLD from "../VerifyWLD";
 
 export function TransactionHistory() {
+    const [isWLDVerified, setIsWLDVerified] = useState(false);
+
+
+    const handleWLDVerification = () => {
+        localStorage.getItem("wld") === "true" ? setIsWLDVerified(true) : setIsWLDVerified(false);
+      }
+    
+      useEffect(() => {
+        handleWLDVerification();
+      }, []);
+
     return (
         <Card>
             <CardHeader>
                 <CardTitle>
                     <div className="flex items-center justify-between mb-6">
                         <h1 className="text-2xl font-bold">Transaction History</h1>
-                        <UploadModal />
+                        {
+                            isWLDVerified ? <UploadModal /> :
+                                <VerifyWLD onSuccess={() => {}} />
+                        }
                     </div>
                 </CardTitle>
             </CardHeader>

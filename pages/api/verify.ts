@@ -14,11 +14,7 @@ export default async function handler(
     const app_id = process.env.NEXT_PUBLIC_WLD_CLIENT_ID as `app_${string}`;
     const action = process.env.NEXT_PUBLIC_WLD_CLIENT_SECRET;
 
-    const verifyRes = (await verifyCloudProof(
-      proof,
-      app_id,
-      action as string
-    )) as IVerifyResponse;
+    const verifyRes = await verifyCloudProof(proof, app_id, action as string);
     console.log("verifyRes", verifyRes);
 
     if (verifyRes.success) {
